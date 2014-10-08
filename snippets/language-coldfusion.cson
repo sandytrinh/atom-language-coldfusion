@@ -118,7 +118,7 @@
     'body': '<cfapplication\n\tname="$1"${2: \n\tloginStorage="$3"\n\tclientManagement="$4"\n\tclientStorage="$5" \n\tsetClientCookies="$6"\n\tsessionManagement="$7"\n\tsessionTimeout = #CreateTimeSpan(${8:days}, ${9:hours}, ${10:minutes}, ${11:seconds})#\n\tapplicationTimeout =  #CreateTimeSpan(${12:days}, ${13:hours}, ${14:minutes}, ${15:seconds})#\n\tsetDomainCookies="$16"}>$0'
   'cfargument':
     'prefix': 'cfargument'
-    'body': '<cfargument name="$1"${2: type="${3:[ ]}" required="${4:[ ]}" default="${5:[ ]}" displayname="${6:[ ]}" hint="${7:[ ]}"}>$0'
+    'body': '<cfargument name="$1" type="$2" required="$3" default="$4"${5: displayname="$6" hint="$7"}>$0'
   'cfassociate':
     'prefix': 'cfassociate'
     'body': '<cfassociate${1: baseTag="${2:[ ]}" dataCollection="${3:[ ]}"}>$0'
@@ -154,7 +154,7 @@
     'body': '<cfcollection action="$1"${2: collection="${3:[ ]}" path="${4:[ ]}" language="${5:[ ]}" name="${6:[ ]}" categories="${7:[ ]}" or "${8:[ ]}"}>$0'
   'cfcomponent':
     'prefix': 'cfcomponent'
-    'body': '<cfcomponent${1: extends ="${2:[ ]}" output="${3:[ ]}" style="${4:[ ]}" namespace="${5:[ ]}" serviceportname="${6:[ ]}" porttypename="${7:[ ]}" bindingname="${8:[ ]}" wsdlfile="${9:[ ]}" displayname="${10:[ ]}" hint="${11:[ ]}"}>\n\t$12\n</cfcomponent>$0'
+    'body': '<cfcomponent displayname="$1" hint="$2"${3: extends ="$4" output="$5" style="$6" namespace="$7" serviceportname="$8" porttypename="$9" bindingname="10" wsdlfile="$11"}>\n\t$12\n</cfcomponent>$0'
   'cfcontent':
     'prefix': 'cfcontent'
     'body': '<cfcontent type="${1:[ ]}" deleteFile="${2:[ ]}" file="${3:[ ]}" variable="${4:[ ]}" reset="${5:[ ]}">$0'
@@ -175,7 +175,7 @@
     'body': '<cfdocumentsection${1: margintop="${2:[ ]}" marginbottom="${3:[ ]}" marginleft="${4:[ ]}" marginright="${5:[ ]}" mimetype="${6:[ ]}" src="${7:[ ]}" srcfile="${8:[ ]}"}>\n\t$9\n</cfdocumentsection>$0\r\r'
   'cfdump':
     'prefix': 'cfdump'
-    'body': '<cfdump${1: var="${2:#variable#}" expand="${3:[ ]}" label="${4:[ ]}" top="${5:[ ]}"}>$0'
+    'body': '<cfdump var="#$1#"${2: label="$3" expand="$4" top="$5"}>$0'
   'cferror':
     'prefix': 'cferror'
     'body': '<cferror type="$1" template="$2"${3: mailTo="${4:[ ]}" exception="${5:[ ]}"}>$0'
@@ -229,7 +229,7 @@
     'body': '<cfftp action="$1" username="$2" password="$3" server="$4"${5: timeout="${6:[ ]}" port="${7:[ ]}" connection="${8:[ ]}" proxyServer="${9:[ ]}" retryCount="${10:[ ]}" stopOnError="${11:[ ]}" passive="yes"}>$0'
   'cffunction':
     'prefix': 'cffunction'
-    'body': '<cffunction name="$1"${2: returnType="${3:[ ]}" roles="${4:[ ]}" access="${5:[ ]}" description="${6:[ ]}"="${7:[ ]}" displayName="${8:[ ]}" hint="${9:[ ]}"}>\n\t$10\n</cffunction>$0'
+    'body': '<cffunction name="$1" returnType="$2" hint="$3"${4: access="$5" roles="$6" description="$7" displayName="$8"}>\n\t$9\n</cffunction>$0'
   'cfgrid':
     'prefix': 'cfgrid'
     'body': '<cfgrid name="$1"${2: format="${3:[ ]}" height="${4:[ ]}" width="${5:[ ]}" query="${6:[ ]}" selectMode="${7:[ ]}" insert="${8:[ ]}" delete="${9:[ ]}" font="${10:[ ]}" fontSize="${11:[ ]}" italic="${12:[ ]}" bold="${13:[ ]}" textColor="${14:[ ]}" gridLines="${15:[ ]}" rowHeight="${16:[ ]}" colHeaders="${17:[ ]}" colHeaderFont="${18:[ ]}" colHeaderFontSize="${19:[ ]}" colHeaderItalic="${20:[ ]}" colHeaderBold="${21:[ ]}" colHeaderTextColor="${22:[ ]}" bgColor="${23:[ ]}" maxRows="${24:[ ]}" style= "${25:[ ]}" enabled="${26:[ ]}" visible="${27:[ ]}" toolTip="${28:[ ]}" onChange="${29:[ ]}" autoWidth="${30:[ ]}" vSpace="${31:[ ]}" hSpace="${32:[ ]}" align="${33:[ ]}" sort="${34:[ ]}" href="${35:[ ]}" hrefKey="${36:[ ]}" target="${37:[ ]}" appendKey="${38:[ ]}" highlightHref="${39:[ ]}" onValidate="${40:[ ]}" onError="${41:[ ]}" gridDataAlign="${42:[ ]}" rowHeaders="${43:[ ]}" rowHeaderAlign="${44:[ ]}" rowHeaderFont="${45:[ ]}" rowHeaderFontSize="${46:[ ]}" rowHeaderItalic="${47:[ ]}" rowHeaderBold="${48:[ ]}" rowHeaderTextColor="${49:[ ]}" colHeaderAlign="${50:[ ]}" selectColor="${51:[ ]}" notSupported="${52:[ ]}" pictureBar="${53:[ ]}" insertButton="${54:[ ]}" deleteButton="${55:[ ]}" sortAscendingButton="${56:[ ]}" sortDescendingButton="${57:[ ]}" onBlur="${58:[ ]}" onFocus="${59:[ ]}"}>\n\t$60\n</cfgrid>$0'
@@ -254,15 +254,15 @@
   'cfhttpparam':
     'prefix': 'cfhttpparam'
     'body': '<cfhttpparam type="$1"${2: name="${3:[ ]}" value="${4:[ ]}" file="${5:[ ]}" encoded="${6:[ ]}" mimeType="${7:[ ]}"}>$0'
-  'cfif else':
-    'prefix': 'cfif'
-    'body': '<cfif $1>\n\t$2\n<cfelse>\n\t$3\n</cfif>$0'
-  'cfif elseif else':
-    'prefix': 'cfif'
-    'body': '<cfif $1>\n\t$2\n<cfelseif $3>\n\t$4\n<cfelse>\n\t$5\n</cfif>$0'
   'cfif':
     'prefix': 'cfif'
-    'body': '<cfif $1>$2</cfif>$0\n'
+    'body': '<cfif $1>\n\t$2\n</cfif>$0\n'
+  'cfelseif':
+    'prefix': 'cfelseif'
+    'body': '<cfelseif $1>\n\t$2$0'
+  'cfelse':
+    'prefix': 'cfelse'
+    'body': '<cfelse>\n\t$1$0'
   'cfimport':
     'prefix': 'cfimport'
     'body': '<cfimport taglib="$1" prefix="$2">$0'
@@ -322,7 +322,7 @@
     'body': '<cfmail \n\tto="$1"\n\tfrom="$2"\n\tsubject="$3"${4:\n\tcc="${5:[ ]}"\n\tbcc="${6:[ ]}"\n\treplyto="${7:[ ]}"\n\tfailto="${8:[ ]}"\n\tusername="${9:[ ]}"\n\tpassword="${10:[ ]}"\n\twraptext="${11:[ ]}"\n\tcharset="${12:[ ]}"\n\ttype="${13:[ ]}"\n\tmimeattach="${14:[ ]}"\n\tquery="${15:[ ]}"\n\tgroup="${16:[ ]}"\n\tgroupcasesensitive="${17:[ ]}"\n\tstartrow="${18:[ ]}"\n\tmaxrows="${19:[ ]}"\n\tserver="${20:[ ]}"\n\tport="${21:[ ]}"\n\tmailerid="${22:[ ]}"\n\ttimeout="${23:[ ]}"\n\tspoolenable="${24:[ ]}"\n\tdebug="${25:[ ]}"}>\n\t$26\n</cfmail>$0'
   'cfmail':
     'prefix': 'cfmail'
-    'body': '<cfmail to="$1" from="$2" subject="$3" server="$4" type="${5:html}">\n\t$6\n</cfmail>$0'
+    'body': '<cfmail to="$1" from="$2" subject="$3"${4: server="$5" type="${6:html}"}>\n\t$7\n</cfmail>$0'
   'cfmailparam':
     'prefix': 'cfmailparam'
     'body': '<cfmailparam file="${1:[ ]}" type ="${2:[ ]}" contentID="${3:[ ]}" disposition="${4:[ ]}">$5'
@@ -376,7 +376,7 @@
     'body': '<cfprocresult name="$1"${2: resultSet="${3:[ ]}" maxRows="${4:[ ]}"}>$0'
   'cfproperty':
     'prefix': 'cfproperty'
-    'body': '<cfproperty name="$1"${2: type="${3:[ ]}" required="${4:[ ]}" default="${5:[ ]}" displayname="${6:[ ]}" hint="${7:[ ]}"}>$0'
+    'body': '<cfproperty name="$1" type="$2" required="$3" default="$4"${5: displayname="$6" hint="$7"}>$0'
   'cfquery (delete sql)':
     'prefix': 'cfquery'
     'body': '<cfquery name="$1" datasource="$2"${3: username="${4:[ ]}" password="${5:[ ]}"}>\n\tdelete from $6\n     where $7\n</cfquery>$0'
@@ -389,12 +389,12 @@
   'cfquery (select sql)':
     'prefix': 'cfquery'
     'body': '<cfquery name="$1" datasource="$2"${3: username="${4:[ ]}" password="${5:[ ]}"}>\n    select $6\n      from $7\n     where $8\n</cfquery>$0'
-  'cfquery (short)':
-    'prefix': 'cfquery'
-    'body': '<cfquery name="$1" datasource="$2">\n\t$3\n</cfquery>$0'
   'cfquery (update sql)':
     'prefix': 'cfquery'
     'body': '<cfquery name="$1" datasource="$2"${3: username="${4:[ ]}" password="${5:[ ]}"}>\n    update $6\n       set $7\n     where $8\n</cfquery>$0'
+  'cfquery (short)':
+    'prefix': 'cfquery'
+    'body': '<cfquery name="$1" datasource="$2">\n\t$3\n</cfquery>$0'
   'cfqueryparam':
     'prefix': 'cfqueryparam'
     'body': '<cfqueryparam value="$1"${2: CFSQLType="${3:[ ]}" maxLength="${4:[ ]}" scale="${5:[ ]}" null="${6:[ ]}" list="${7:[ ]}" separator="${8:[ ]}"}>$0'
@@ -439,10 +439,10 @@
     'body': '<cfselect name="$1"${2: label="${3:[ ]}" style="${4:[ ]}" size="${5:[ ]}" required="${6:[ ]}" message="${7:[ ]}" onError="${8:[ ]}" multiple="${9:[ ]}" query="${10:[ ]}" value="${11:[ ]}" display="${12:[ ]}" group="${13:[ ]}" queryPosition="${14:[ ]}" selected="${15:[ ]}" onKeyUp="${16:[ ]}" onKeyDown="${17:[ ]}" onMouseUp="${18:[ ]}" onMouseDown="${19:[ ]}" onChange="${20:[ ]}" onClick="${21:[ ]}" enabled="${22:[ ]}" visible="${23:[ ]}" tooltip="${24:[ ]}" height="${25:[ ]}" width="${26:[ ]}" editable="${27:[ ]}"}>\n\t$28\n</cfselect>$0\r'
   'cfset':
     'prefix': 'cfset'
-    'body': '<cfset $1 = $0${TM_XHTML}>'
+    'body': '<cfset $1 = $0>'
   'cfsetting':
     'prefix': 'cfsetting'
-    'body': '<cfsetting${1: enableCFoutputOnly="${2:[ ]}" showDebugOutput="${3:no}" requestTimeOut="${4:30}"}>$0'
+    'body': '<cfsetting enableCFoutputOnly="$1"${2: showDebugOutput="${3:no}" requestTimeOut="${4:30}"}>$0'
   'cfsilent':
     'prefix': 'cfsilent'
     'body': '<cfsilent>\n\t$1\n</cfsilent>$0'
