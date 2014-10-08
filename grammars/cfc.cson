@@ -1,0 +1,165 @@
+'fileTypes': [
+  'cfc'
+]
+'name': 'CFC'
+'scopeName': 'source.cfscript.cfc'
+'patterns': [
+  {
+    'begin': '\''
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.cfc'
+    'end': '\''
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.cfc'
+    'name': 'string.quoted.single.cfc'
+    'patterns': [
+      {
+        'match': '\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+        'name': 'constant.character.escape.cfc'
+      }
+    ]
+  }
+  {
+    'begin': '"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.cfc'
+    'end': '"'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.cfc'
+    'name': 'string.quoted.double.cfc'
+    'patterns': [
+      {
+        'match': '\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
+        'name': 'constant.character.escape.cfc'
+      }
+    ]
+  }
+  {
+    'name': 'meta.function.cfc'
+    'comment': 'match regular function like: function myFunc(arg) { … }'
+    'begin': '\\b(function\\*?)\\s*((\\*)|(\\*?[a-zA-Z_$]\\w*))?\\s*(\\()'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.function.cfc'
+      '2':
+        'name': 'entity.name.function.cfc'
+      '3':
+        'name': 'punctuation.definition.parameters.begin.cfc'
+    'end': '(\\))'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.parameters.end.cfc'
+    'patterns': [
+      {
+        'include': '#function-params'
+      }
+    ]
+  }
+  {
+    'name': 'storage.type.cfc'
+    'match': '\\b(component|function|property|var)\\b'
+  }
+  {
+    'name': 'variable.language.cfc'
+    'match': '\\b(local)\\b'
+  }
+  {
+    'name': 'constant.language.cfc'
+    'match': '\\b(true|false)\\b'
+  }
+  {
+    'name': 'storage.modifier.cfc'
+    'match': '\\b(public|private)\\b'
+  }
+  {
+    'name': 'keyword.control.cfc'
+    'match': '\\b(break|do|import|case|if|else|in|while|catch|finally|interface|try|for|pageencoding|continue|default|switch|return|required)\\b'
+  }
+  {
+    'name': 'storage.type.primitive.cfc'
+    'match': '\\b(numeric|string|struct|array)\\b'
+  }
+  {
+    'name': 'keyword.operator.cfc'
+    'match': '\\b(==|EQ|\\!=|NEQ|<|LT|<=|LTE|>|GT|>=|GTE|&|AND|\\||OR|!|NOT|IS)\\b'
+  }
+  {
+    'name': 'support.function.cfc'
+    'match': '\\b(throw|writedump|writelog|location|trace)\\b'
+  }
+  {
+    'match': '\\;'
+    'name': 'punctuation.terminator.statement.cfc'
+  }
+  {
+    'match': ',[ |\\t]*'
+    'name': 'meta.delimiter.object.comma.cfc'
+  }
+  {
+    'match': '\\.'
+    'name': 'meta.delimiter.method.period.cfc'
+  }
+  {
+    'begin': '(^[ \\t]+)?(?=//)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.cfc'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': '//'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.cfc'
+        'end': '\\n'
+        'name': 'comment.line.double-slash.cfc'
+      }
+    ]
+  }
+  {
+    'begin': '/\\*'
+    'captures':
+      '0':
+        'name': 'punctuation.definition.comment.cfc'
+    'end': '\\*/'
+    'name': 'comment.block.cfc'
+  }
+  {
+    'match': '\\{|\\}'
+    'name': 'meta.brace.curly.cfc'
+  }
+  {
+    'match': '\\(|\\)'
+    'name': 'meta.brace.round.cfc'
+  }
+  {
+    'match': '\\[|\\]'
+    'name': 'meta.brace.square.cfc'
+  }
+]
+'repository':
+  'function-params':
+    'patterns': [
+      {
+        'match': '\\b(required)\\b'
+        'name': 'support.constant'
+      }
+      {
+        'include': '#primitive-types'
+      }
+      {
+        'match': '(\\w+),'
+        'name': 'variable.parameter.cfc'
+      }
+    ]
+  'primitive-types':
+    'patterns': [
+      {
+        'match': '\\b(void|boolean|string|numeric|struct|array|any)\\b'
+        'name': 'storage.type.primitive.cfc'
+      }
+    ]
